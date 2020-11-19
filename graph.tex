@@ -1,0 +1,141 @@
+\section{基本定义与概念}
+\begin{definition}[图]
+	一个图(graph)是一个二元有序对$(V, E)$，其中$V$是所有顶点（vertices）的集合， $E$是所有边$edges$的集合。一条边$(u, v)$常被写作$uv$。$V(G)$和$E(G)$分别为图$G$的顶点和边的集合。一个图$G$的阶（order）是图的顶点个数（cardinality）$|V(G)|$。对于$v\in V(G)$，如果存在$uv\in E(G)$，我们称$u$和$v$是邻接（adjacent）的，否则称为非邻接（nonadjacent）的。顶点$v$的邻居（neighborhood），被记做$N_G(v)$是所有与$v$邻接的顶点的集合。
+\end{definition}
+\begin{definition}[简单图]
+	一个简单图是一个既没有重边（multiple edge）也没有环（loop）的图。
+\end{definition}
+\begin{definition}[补图]
+	给定一个简单图$G = (V, E)$，它的补图（complement）的定义为简单图
+	\begin{equation*}
+		\bar{G} = (V, \bar{E}),
+	\end{equation*}
+	其中$\bar{E} = V^2\backslash E$。意思是$\bar{G}$中的点之间有边相连当且仅当在$G$里面他们没有边相连。我们构建补图时可先构建完全图$K_{|V(G)|}$，再删除$G$中出现过的边即可。
+\end{definition}
+\begin{definition}[团]
+	团（clique）是$G$中的一组满足两两之间有边连接的顶点的集合。图$G$的团数（clique number）是指图$G$中最大的团的阶数。
+\end{definition}
+\begin{definition}[独立集]
+	图$G$独立集（independent set）或稳定集（stable set）是一族两点之间互不相连的定点的集合。$G$的独立数（independent number），记为$\alpha(G)$，是$G$中最大的独立集的阶数（order）。
+\end{definition}
+\begin{definition}[孤立点]
+	一个顶点被称为孤立点当且仅当它没有邻居， i.e.
+	\begin{equation*}
+		N_G(v) = \emptyset
+	\end{equation*}
+\end{definition}
+\begin{definition}[邻接矩阵与关联矩阵]
+	图$G$是一个顶点和边分别为
+	\begin{equation*}
+		V = \{v_1, v_2, \cdots, v_n\} \text{ 和 } E = \{e_1, e_2, \cdots, e_m\}
+	\end{equation*}
+	图$G$的邻接矩阵（adjacency matrix）是指矩阵$(a_{ij})_{n\times n}$， 其中$a_{ij}$是顶点$v_i$和$v_j$间的边数（简单图中只能为0或1）。图$G$的关联矩阵（incidence matrix）是指矩阵$(b_{ij})_{n\times m}$，其中
+	\begin{equation*}
+		b_{ij} = \begin{cases}
+			1, \text{如果顶点$v_i$与边$e_j$相连}\\
+			0, \text{其他情况}
+		\end{cases}
+	\end{equation*}
+	一个图的谱（spectrum）是指邻接矩阵的所有特征值的集合。
+\end{definition}
+\begin{definition}[度数]
+	图$G$的一个顶点$v$的度数（degree）是与$v$连接的边的数量，常被记做$deg_G(v)$。度序列（degree sequence）是指一个由所有顶点的度从大到小排列而成的序列。一个图被称为正则的（regular）如果所有顶点的度相同。一个图被称为$k$-正则（$k$-regular）如果它的所有顶点的度数都相同且为$k$。一个图被称为cubic的如果它是3-正则的。图$G$的最大与最小度被分别记为$\Delta(G)$与$\delta(G)$。如果一个顶点的度为$1$则它被称为叶（leaf）。一个连接叶的边被称为叶边（leaf edge）。
+\end{definition}
+\begin{note}
+	一个环（loop）对度的贡献为$2$。
+\end{note}
+\begin{theorem}[握手引理（the Handshaking Lemma）]
+	对于任何有限图$G = (V, E)$，我们有
+	\begin{equation*}
+		\sum\limits_{v\in V} deg\ v = 2|E|
+	\end{equation*}
+\end{theorem}
+\begin{note}
+	很自然的能看出图$G$中一定有偶数个度数为奇数的顶点。
+\end{note}
+\begin{theorem}
+	一个非降的非负整数序列$d_1\geq d_2\geq \cdots \geq d_n$成为一个度序列的充分必要条件为$\sum\limits_{i=1}^n d_i$是偶数。
+\end{theorem}
+\begin{definition}
+	设$G = (V, E)$是一个简单图。$G$的子图（subgraph）是图$(V', E')$，其中$E'\subseteq E$，$V'\subseteq V$，并且$V'$包含$E'$中所有边的端点。生成子图（spanning subgraph）也称作$G$的一个因子（factor），是一个子图并且包含原图$G$的所有端点。$G$有$k$-因子（$k$-factor）是指一个每个顶点的度都为$k$的生成子图。图$G$的分解（factorization）是指将一个图的所有边都分拆为因子（factors）。诱导子图（induced subgraph）是子图$(V', G')$，如果$V'$中的顶点在$G$中相连，则他们一定在$G'$中相连。一个顶点集$U\subseteq V$的邻居（neighborhood）定义为$U$中所有顶点的邻居的并，即
+	\begin{equation*}
+		N_G(U) = \bigcup\limits_{v\in U}N_G(v)
+	\end{equation*}
+\end{definition}
+\begin{definition}
+	一个walk是一个边（edges）的序列。walk的长度是指它所含的边的个数。一个walk是闭合的（closed）当且仅当它的起始点和终点相同。一个trail是一个walk且不经过重复的边。一个path是一个trail且不经过重复的顶点。两个顶点的距离被定义为两个顶点间最短的path的长度。一张图的直径（diameter）是最短距离的最大值。图的Eulerian path是一个trail而且访问过所有边，一个Eulerian circuit是一条到访过所有边的trail。一个图被称为Eulerian如果它包含一个Eulerian 回路。Hamiltonian path是一个生成子图（到访所有顶点）。
+\end{definition}
+\begin{definition}
+	一个$k$-cycle是简单图$G$中的闭合walk$v_1v_2\cdots v_kv_1$并且不经过重复的边，进一步，一个$k$-cycle同构与$C_k$。一个图被称为acyclic如果它不包含cycle，这样的图被称为森林（forest）。图的围长（girth）是指图中最短的圈常，circumference是指图中最长的圈的长度。一个图是Hamiltonian的当且仅当它的circumference等于它的度数（order）。
+\end{definition}
+\begin{definition}
+	一个图被称为连通的（connected）如果每一对顶点之间都有一条path，否则被称为不连通的（disconnected）。一个连通分支（connected component）是指图$G$中最大的连通子图，一个奇分支（odd component）是一个阶为奇数的分支，否则称为偶分支。
+\end{definition}
+\begin{definition}
+	对于$k\in \mathbb Z^+$，一个图被称为$k$-connected的如果去除任意$k-1$个顶点后该图都是连通的。图$G$连通度（connectivity），记做$\kappa (G)$是最大的$k$使得图$G$是$k$-connected。
+\end{definition}
+\begin{theorem}
+	一个简单图$G$是连通的如果
+	\begin{equation*}
+		\delta(G)\geq \frac{|V(G)|}{2}.
+	\end{equation*}
+\end{theorem}
+\begin{definition}
+	令$k\geq 2$。一个$k$部图（$k$-partite）是指图$G = (V, E)$满足它可以被分解为$k$个非空稳定集（stable sets）（内部不连通）。一个图被称为多部图（multipartite）如果$k\geq 2$。一个$2$-partite图也被称为bipartite图。它的顶点集可被分解为
+	\begin{equation*}
+		V = V_1\sqcup V_2
+	\end{equation*}
+\end{definition}
+\begin{theorem}
+	任意的连通二部图的分解是惟一的。
+\end{theorem}
+\begin{theorem}
+	一个有限连通图是欧拉图当且仅当所有顶点的度数都是偶数。
+\end{theorem}
+\begin{definition}
+	如下是一些常见图的例子
+	\begin{enumerate}
+		\item 空图（empty graph）是指图$(V, E)$满足$V = E = \emptyset$
+		\item $n$阶完全图（complete graph），记做$K_n$是指有$n$个顶点且任意两个顶点都相邻的图。
+		\item 完全$k$-部图（complete k-partite graph），记做$K_{n_1, n_2, \cdots, n_K} = (V, E)$是指简单图其顶点被分为了非空集合$V_1, V_2, \cdots , V_k$，其中$k\geq 2$且$|V_i|=n_i$对于任意$i$成立且满足
+		\item \begin{equation*}
+			E = \bigcup\limits_{i\neq j}(V_i\times V_j).
+		\end{equation*}
+		意思是任意两个不属于同一部分的顶点都有边相连。\par
+		完全多部图是指完全$k$-部图且$k\geq 2$。一个完全二部图形为$K_{n_1, n_2}$。Turan图是一个完全$k$-部图$K_{n_1, n_2, \cdots, n_K}$且满足
+		\begin{equation*}
+			|n_i - n_j|\leq 1
+		\end{equation*}
+		对于任意$i$和$j$都成立。
+		\item $n$阶path graph，记做$P_n$，是指一个简单图$(V, E)$，其中
+		\begin{equation*}
+			\begin{split}
+				V &= \{v_1, v_2,\cdots, v_n\}\text{ 并且 }\\
+				E &= \{v_1v_2, v_2v_3, \cdots, v_{n-1}v_n\}
+			\end{split}
+		\end{equation*}
+		\item $n$阶cycle graph，记做$C_n$，是指简单图$(V, E)$，其中
+		\begin{equation*}
+			\begin{split}
+				V &=\{v_1, v_2,\cdots, v_n\}\text{ 并且 }\\
+				E &= \{v_1v_2, v_2v_3, \cdots, v_{n-1}v_n, v_nv_1\}
+			\end{split}
+		\end{equation*}
+		$C_3, C_4, C_5, C_6$分别被称为 triangle, rectangle, pentagon和 hexagon。
+		\item 树（tree）是一个不含cycle的连通图。星（star）是一个形如$K_1, n$的图，其中$k\geq 2$。 claw 是 star $K_1, 3$，caterpillar是一个树且满足它们所有顶点距离中心path的距离小于$1$，lobster是一个树且满足它们所有顶点距离中心path的距离小于$2$。
+		\item 一个$n$阶（$n\geq 4$）轮图（wheel graph），记做$W_n$，是一个简单图$(V, E)$满足
+		\begin{equation*}
+			\begin{split}
+				V &= \{v_1, v_2,\cdots, v_n\}\text{ 并且 }\\
+				E &= \{v_0v_i: 1\leq i \leq n-1\}\cup \{v_1v_2, v_2v_3,\cdots, v_{n-1}v_n, v_nv_1\}.
+			\end{split}
+		\end{equation*}
+		\item 一个通过$n$阶完全图$K_n$删去一个顶点的图常被记做$K_n - e$。钻石（diamond graph）是指图$K_4 - e$
+		\item Petersen graph是指简单图$G = (V, E)$满足
+		\begin{equation*}
+			V = \binom{[5]}{2}\text{ 和 }E = \{uv\in V^2: u\cap v =\emptyset\}
+		\end{equation*}
+		它有$10$个顶点$15$条边。
+		\item 超立方图（hypercube graph），记做
+	\end{enumerate}
+\end{definition}

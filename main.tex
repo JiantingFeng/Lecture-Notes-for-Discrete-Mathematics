@@ -1,0 +1,49 @@
+\documentclass[11pt,titlepage]{report}
+\usepackage{Preamble}
+
+\begin{document}
+
+\begin{titlepage}
+    \newgeometry{margin=3cm}
+	\centering
+%    \includegraphics[width=0.8\linewidth]{BIT.png}\\[0.25cm] 	% University Logo
+    \textsc{\LARGE Jianting's Lecture Review Notes}\\ \vspace{\fill}
+    \textbf{\textsc{\fontsize{20}{20}\selectfont 离散数学\\ Discrete Mathematics}}\\ \vspace{\fill}
+    \medskip
+    \textsc{2020 Fall}\\
+    \medskip
+    \textsc{Instructor : 王国亮}\\
+    \medskip
+    \textsc{Textbook : 课堂讲义}\\
+    \bigskip
+	\textsc{Review for Discrete Mathematics}\\[0.4cm]
+	\rule{\linewidth}{0.2 mm} \\[0.5 cm]
+	Jianting Feng\\
+	\today\\
+	BEIJING INSTITUTE OF TECHNOLOGY
+\end{titlepage}
+\restoregeometry
+
+\newpage
+\begin{abstract}
+	\input{abstract.tex}
+\end{abstract}
+\tableofcontents
+\newpage
+\thispagestyle{numberonly}
+\chapter{计数 Enumerate}
+\input{enumerate}
+\chapter{组合数与组合恒等式 Combinatorial numbers
+and identities}
+\input{combinatorial.tex}
+\chapter{数论 Number Theory}
+\input{numbertheory.tex}
+
+\chapter{图论 Graph Theory}
+\input{graph}
+
+\clearpage
+\pagestyle{numberonly}
+\printbibliography
+
+\end{document}

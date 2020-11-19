@@ -1,0 +1,210 @@
+\section{集合分拆与重集}
+\begin{definition}[集合分拆]
+	集合分拆是指将集合$[n] \triangleq \{1, 2, \cdots, n\}$中的元素分为数个不同的非空集合$B_1, B_2, \cdots, B_r$，并且保证每个元素一定要在某个$B_i$中，这样的$B_i$被称为blocks。
+\end{definition}
+\begin{definition}[第二类斯特林数（The Stirling number of the second kind）]
+	第二类斯特林数$S(n, k)$是将集合$[n]$分拆为$k$个不同的非空的blocks的方法总数。$[n]$的matching是指每个block包含最多两个元素。
+\end{definition}
+\begin{proposition}
+	对于任意$n, k \geq 1$，
+	\begin{equation*}
+		S(n, k) = \frac{1}{k!}\sum\limits_{i=0}^k (-1)^i\binom{k}{i}(k-i)^n
+	\end{equation*}
+\end{proposition}
+\section{整数分拆与组合（partitons and compositions）}
+\begin{definition}
+	正整数$n$的一个分拆是指一列正整数$\lambda$，常记做
+	\begin{equation*}
+		\lambda = (\lambda_1, \lambda_2, \cdots, \lambda_r)\vdash n,
+	\end{equation*}
+	满足
+	\begin{equation*}
+		\lambda_1\geq \lambda_2\geq \cdots \geq \lambda_r\geq 1\text{ and }\sum\limits_{i=1}^r\lambda_i = n.
+	\end{equation*}
+	令$p(0) = 1$且$p(n)$是$n\geq 1$的分拆总数，这样的$p(n)$被称为分拆函数（partition function）。
+\end{definition}
+\begin{definition}
+	一个$n$的composition是一列非负整数$\mu$记为
+	\begin{equation*}
+		\mu = (\mu_1, \mu_2, \cdots, \mu_r)\models n,
+	\end{equation*}
+	满足
+	\begin{equation*}
+		\sum\limits_{i=1}^n \mu_i = n
+	\end{equation*}
+\end{definition}
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+		\hline
+		n & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16\\		
+		\hline
+		p(n) & 1 & 1 & 2 & 3 & 5 & 7 & 11 & 15 & 22 & 30 & 42 & 56 & 77 & 101 & 135 & 176 & 231\\
+		\hline
+	\end{tabular}
+	\caption{分拆函数$p(n)$的值}
+\end{table}
+\begin{definition}
+	对于任意一个分拆$\lambda = (\lambda_1, \lambda_2, \cdots, \lambda_r\vdash n$，我们可以画一个左对齐的图，一共有$r$行，每一行都有$\lambda_i$个点（dots）。这样的图被称为$\lambda$的Ferrers diagram。如果用方格（squares）代替点，则得到的图被称为Young diagram。相应的分拆$\lambda$被称作该图的shape，记做$sh\lambda$。将Young diagram 沿其主对角线翻转（flip）得到的新的Young diagram被称作原Young diagram 的共轭（conjugate）。一个分拆是自共轭（self-conjugate）的当且仅当它的共轭等于自身。Young diagram的Durfee square是指该图内部中最大的正方形（square）。
+\end{definition}
+\begin{proposition}
+	将正整数$n$分拆为$m$份的分拆的数量等于将$n$分拆为若干份，每一份最大为$m$的分拆数。
+\end{proposition}
+\begin{proof}
+	考虑Young diagram的共轭即可。
+\end{proof}
+\begin{proposition}
+	$n$的自共轭的分拆总数等于将$n$分拆为若干个不同的奇数的分拆数。
+\end{proposition}
+\begin{definition}
+	Euler函数是指
+	\begin{equation*}
+		\phi(q) = \prod\limits_{n\geq 1}(1-q^n)
+	\end{equation*}
+\end{definition}
+\begin{corollary}
+	欧拉函数的倒数$1/ \phi(q)$是分拆函数$p(n)$的生成函数，即
+	\begin{equation*}
+		\sum\limits_{n\geq 0}p(n)q^n = \frac{1}{\phi(q)}
+	\end{equation*}
+\end{corollary}
+\begin{theorem}
+	将一个整数$n$分拆为每一部分都是奇数的分拆数等于将其分拆为不同部分的分拆数。
+\end{theorem}
+\begin{proof}
+	考虑代数证明， 令$a_n$为将$n$分拆为奇数部分的分拆数， $b_n$为将$n$分拆为不同部分的分拆数。则有
+	\begin{equation*}
+		\sum\limits_{n\geq 0} b_nq^n = \prod\limits_{n\geq 1}(1+q^n) = \prod \frac{1-q^{2n}}{1-q^n} = \prod\limits_{n\text{ odd}}\frac{1}{1-q^n} = \sum\limits_{n\geq 0}a_n q^n
+	\end{equation*}
+	提取$q^n$的系数即可。
+\end{proof}
+\begin{theorem}[五角数定理（Pentagonal number theorem）]
+	\begin{equation*}
+		\begin{split}
+			\phi(q)& = \prod\limits_{n\geq 1}(1-q^n) = \sum\limits_{n\in \mathbb{Z}} (-1)^n q^{\frac{3n^2-n}{2}}\\
+			& = 1 - q - q^2 + q ^5 +q^7 - q^{12}-q^{15}+\cdots.
+		\end{split}
+	\end{equation*}
+\end{theorem}
+\section{置换与词}
+\begin{definition}
+	置换（permutation）是一个集合到自己的双射。集合$[n]$上的置换常被记做$\mathfrak{S}_n$。对合（involution）是每个cycle至多为$2$的置换（满足$\pi^2 = \pi$）。一个错排（derangement）是指没有不动点的置换$\pi \in \mathfrak{S}_n$，即对于任意$i\in [n]$，我们都有$\pi(i)\neq i$。一个置换$\pi = \pi_1\cdots \pi_n$反转（reversal）是$\pi_n \pi_{n-1}\cdots  \pi_1$。置换$\pi$的补是$\sigma_1\sigma_2\cdots \sigma_n$其中$\sigma_i = n+1-\pi_i$。词（word）是在一个重集上的置换，形如$w_1w_2\cdots w_n$其中$w_i$允许有重复。
+\end{definition}
+令$\pi \in \mathfrak{S}_n$，$c_i$为$\pi$中长度为$i$的cycle的数量，则$\pi$中的cycle的总数为
+\begin{equation*}
+	c(\pi) = c_1+c_2+\cdots+c_n
+\end{equation*}
+我们将整数分拆$1^{c_1}2^{c_2}\cdots n^{c_n}$为$\pi$的type，则有
+\begin{equation*}
+	c_1+2c_2+\cdots+nc_n = n
+\end{equation*}
+\begin{example}
+	置换$\pi = (125)(34)$的type是
+	\begin{equation*}
+		1^02^13^14^05^0\vdash 5
+	\end{equation*}
+\end{example}
+\begin{proposition}
+	对于置换$\sigma\in\mathfrak{S}_n$，我们称它是$\pi$的共轭，如果存在$\tau\in\mathfrak{S}_n$满足
+	\begin{equation*}
+		\sigma = \tau^{-1}\pi\tau
+	\end{equation*}
+	两个$\mathfrak S_n$中的置换彼此共轭当且仅当它们有相同的type。
+\end{proposition}
+\begin{proposition}
+	在$\pi\in\mathfrak S_n$中type为 $c= 1^{c_1}2^{c_2}\cdots n^{c_n}$的置换总数为$\frac{n!}{z_c}$，其中
+	\begin{equation*}
+		z_c = 1^{c_1} c_1!2^{c_2}c_2!\cdots n^{c_n}c_n!
+	\end{equation*}
+\end{proposition}
+\begin{definition}
+	\begin{equation*}
+		s(n, k) = (-1)^{n-k}c(n, k)
+	\end{equation*}
+	为第一类斯特林数（Stirling numbers of the first knd）， 其中$c(n, k)$是$\mathfrak S_n$中有$k$个cycle的置换数量， 被称为无符号的第一类斯特林数（signless Stirling number of the first kind）。
+\end{definition}
+\begin{definition}[置换统计量（Permutation statistics）]
+	设$\pi = \pi_1\pi_2\cdots \pi_n\in\mathfrak S_n$.
+	\begin{enumerate}
+		\item $\pi$的descent是满足如下条件的$i$的个数，$i\in [n-1]$满足
+		\begin{equation*}
+			\pi_i > \pi_{i+1}
+		\end{equation*}
+		$\pi$的ascent是是满足如下条件的$i$的个数，$i\in [n-1]$满足
+		\begin{equation*}
+			\pi_i < \pi_{i+1}
+		\end{equation*}
+		major index $maj(\pi)$是$\pi$的所有的descent的和，i.e.，
+		\begin{equation*}
+			maj(\pi) = \sum\limits_{\pi_i>\pi_{i+1}}i
+		\end{equation*}
+		\item $\pi$的inversion 是满足如下条件的pair的个数，$\pi_i, \pi_j$满足
+		\begin{equation*}
+			i < j\quad\text{and}\quad \pi_i>\pi_j
+		\end{equation*}
+		\item $\pi$的 excedance 是是满足如下条件的$i$的个数，$i\in [n]$满足$\pi > i$
+		\item $\pi$的peak 是数$i\in \{2,3,\cdots, n-1\}$满足
+		\begin{equation*}
+			\pi_{i-1}<\pi_i\quad\text{and}\quad \pi_i>\pi_{i+1.}
+		\end{equation*}
+		$\pi$的valley 是数$i\in \{2,3,\cdots, n-1\}$满足
+		\begin{equation*}
+			\pi_{i-1}>\pi_i\quad\text{and}\quad \pi_i<\pi_{i+1.}
+		\end{equation*}
+		\item $\pi$的left-to-right  maxima是数$\pi_i$的集合满足对于任意$j<i$
+		\begin{equation*}
+				\pi_i>\pi_j
+		\end{equation*}
+		同样我们可以定义left-to-right  minima， right-to-left  maxima， right-to-left  minima
+	\end{enumerate}
+\end{definition}
+\begin{example}
+	$\pi = 25431\in \mathfrak S_5$的descent set为$\{2, 3, 4\}$，ascent set为$\{1\}$，inversion set是$\{(5,4),(5, 3), (5, 1),(4,3), (4,1), (3, 1),(2, 1)\}$，excedance set为$\{1, 2, 3\}$，因此
+	\begin{equation*}
+		des(\pi) = 3,maj(\pi) = 9,asc(\pi) = 1, inv(\pi) = 7, exc(\pi) = 3
+	\end{equation*}
+	left-to-right maxima为$\{2, 5\}$， left-to-right minima为$\{2， 1\}$,right-to-left maxima为$\{1, 3, 4, 5\}$， right-to-left minima为$\{1\}$。
+\end{example}
+\begin{definition}
+	第$n$个欧拉多项式（Eulerian polynomial）为
+	\begin{equation*}
+		A_n(x) = \sum\limits_{\pi\in \mathfrak S_n}x^{1+des(\pi)} = \sum\limits_{k=1}^nA(n, k)x^k，
+	\end{equation*}
+	系数为
+	\begin{equation*}
+		A(n, k) = |\{\pi\in\mathfrak S_n : des(\pi) = k-1\}|
+	\end{equation*}
+	被称为欧拉数（Eulerian number）。
+\end{definition}
+\begin{note}
+	事实上，$A(n, k)$为长为n的置换中descent为k-1的置换的个数。
+\end{note}
+\begin{definition}
+	任意一个和
+descent numbers同分布的统计量被称为Eulerian statistic.任何一个和 inversion numbers同分布的统计量被称为Mahonian statistic.
+\end{definition}
+\begin{definition}
+	设$L = (a_0, a_1, \cdots, a_n)$是一列正数。我们称$L$是unimodal的如果存在一个指标$1\leq k\leq n$满足
+	\begin{equation*}
+		a_0\leq a_1\leq \cdots \leq a_k \geq a_{k+1}\geq \cdots \geq a_n,
+	\end{equation*}
+	我们称$L$是log-concave的如果对于所有$k$都有
+	\begin{equation*}
+		a_{k-1}a_{k+1}\leq a_k^2
+	\end{equation*}
+	$L$是real-rooted的如果多项式$\sum\limits_{j=0}^na_jx_j$的根都是实根。
+\end{definition}
+\begin{example}
+	$\binom{n}{k}$是unimodal，log-concave且real-rooted的。
+\end{example}
+\begin{theorem}
+	设$L = (a_0, a_1, \cdots, a_n)$是一列正数，则我们有如下的结论
+	\begin{enumerate}
+		\item 如果$L$是 real-rooted的， 则$L$是log-concave；
+		\item 如果$L$是 log-concave的， 则$L$是unimodal；
+		\item 如果$L$是 real-rooted的， 则它有一个或两个最大值。
+	\end{enumerate}
+\end{theorem}
+\begin{theorem}
+	 欧拉数序列$\{A(n, k)\}_k$是real-rooted, i.e.,Eulerian多项式的所有零点都是实数。
+\end{theorem}
