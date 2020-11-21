@@ -1,1 +1,125 @@
 \section{二项式系数}
+\begin{theorem}[二项式定理（Binomial theorem）]
+	令$n\geq 1$为正整数。那么有
+	\begin{equation*}
+		(x+y)^n = \sum\limits_k \binom{n}{k}x^ky^{n-k}
+	\end{equation*}
+\end{theorem}
+\begin{proposition}\label{combinatorial identities}
+	二项式系数满足下列恒等式
+	\begin{equation*}
+		\binom{n}{k} = \binom{n}{n-k},
+	\end{equation*}
+	\begin{equation*}
+		\binom{n}{k} = \binom{n-1}{k} + \binom{n-1}{k-1},
+	\end{equation*}
+	\begin{equation*}
+		\binom{n}{k} = \frac{n}{k}\binom{n-1}{k-1},
+	\end{equation*}
+	\begin{equation*}
+		\binom{a}{b}\binom{b}{c} = \binom{a}{c}\binom{a-c}{b-c},
+	\end{equation*}
+	\begin{equation*}
+		\sum_k \binom{n}{k} = 2^k,
+	\end{equation*}
+	\begin{equation*}
+		\sum_j \binom{n}{j}\binom{m}{k-j} = \binom{n+m}{k},
+	\end{equation*}
+	\begin{equation*}
+		\sum_j \binom{n}{j}^2 = \binom{2n}{n},
+	\end{equation*}
+	\begin{equation*}
+		\sum_j (-1)^j\binom{n}{j} = 0,
+	\end{equation*}
+	\begin{equation*}
+		\sum_j \binom{n}{j}2^j = 3^n,
+	\end{equation*}
+	\begin{equation*}
+		\sum_k \binom{n}{k}\binom{k}{m} = \binom{n}{m} 2^{n-m}.
+	\end{equation*}
+\end{proposition}
+\begin{proposition}[Hockey-stick identity]
+	\begin{equation*}
+		\binom{n}{r} + \binom{n-1}{r}+\cdots + \binom{r}{r} = \binom{n+1}{r+1}
+	\end{equation*}
+\end{proposition}
+\begin{proof}
+	用两种方法计数（counting by two ways），其中一边是考虑固定最大的元素即可。
+\end{proof}
+\begin{proposition}
+	对于任意$0\leq k\leq n$，
+	\begin{equation*}
+		\sum\limits_{j=0}^k (-1)^j \binom{n}{j} = (-1)^k\binom{n-1}{k}.
+	\end{equation*}
+\end{proposition}
+\begin{proof}
+	使用telescoping method，注意使用\ref{combinatorial identities}中的第二个式子即可。
+\end{proof}
+\begin{theorem}[Multinomial theorem]
+	设$n\in \mathbb{N}$，则
+	\begin{equation*}
+		\big(\sum\limits_{j=1}^mx_j\big)^n = \sum\limits_{k_1+k_2+\cdots+k_m=n\newline k_1, \cdots,\_m\in \mathbb{N}}\binom{n}{k_1, k_2,\cdots, k_m}\prod\limits_{j=1}^m x_j^{k_j}
+	\end{equation*}
+\end{theorem}
+\begin{proposition}
+	将$n$个完全相同的物品分给$k$个人的分法数为
+	\begin{equation*}
+		\big(\tbinom{n+1}{k-1}\big)
+	\end{equation*}
+	若要求每个人都分到一件，则分法数为
+	\begin{equation*}
+		\binom{n+1}{k-1}
+	\end{equation*}
+\end{proposition}
+\begin{proof}
+	使用method of stars and bars
+	\begin{equation*}
+		\bigstar \bigstar \bigstar \bigstar \bigstar \bigstar \bigstar
+	\end{equation*}
+	\begin{equation*}
+		\bigstar \bigstar \bigstar \bigstar \bracevert \bigstar \bracevert \bigstar \bigstar
+	\end{equation*}
+	\begin{equation*}
+		\bigstar \bigstar \bigstar \bigstar \bracevert \bracevert \bigstar \bigstar \bigstar
+	\end{equation*}
+	注意在$n+1$个位置能放置$k-1$个bar即可。
+\end{proof}
+\begin{theorem}
+	对于任意$n\in\mathbb Z$和$k\in \mathbb N$，有
+	\begin{equation*}
+		\big(\tbinom{n}{k}\big) = \binom{n+k-1}{k}
+	\end{equation*}
+\end{theorem}
+\section{Catalan数}
+\begin{definition}
+	第$n$个Catalan数为
+	\begin{equation*}
+		C_n = \frac{1}{n+1}\binom{2n}{n}
+	\end{equation*}
+\end{definition}
+Catalan数满足如下的递推公式，对于任意$n\geq 0$，
+\begin{equation*}
+	C_{n+1} = \sum\limits_{i=0}^nC_iC_{n-i}
+\end{equation*}
+通过递推公式容易得到Catalan数的生成函数
+\begin{equation*}
+	C(z) = \frac{1-\sqrt{1-4z}}{2z}
+\end{equation*}
+\begin{theorem}
+	Catalan数$C_n$是以下结构的数量：
+	\begin{enumerate}
+		\item 凸$n+2$边形的三角剖分数量；
+		\item $n$个顶点的二叉树；
+		\item $n+1$个顶点的平面树；
+		\item $2n$长的投票序列（Ballot sequences）；
+		\item 对$n+1$个$x$加括号（Parenthesizations or bracketings）；
+		\item 长为$2n$的Dyck paths的数量。
+	\end{enumerate}
+\end{theorem}
+\section{Bell数}
+\begin{definition}
+	第$n$个Bell数$B_n$为集合$[n]$的拆分总数，即
+	\begin{equation*}
+		B_n = \sum\limits_{k=0}^n S(n, k)
+	\end{equation*}
+\end{definition}

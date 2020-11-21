@@ -1,4 +1,4 @@
-\documentclass[11pt,titlepage]{report}
+\documentclass[11pt,titlepage]{book}
 \usepackage{Preamble}
 
 \begin{document}
@@ -14,7 +14,7 @@
     \medskip
     \textsc{Instructor : 王国亮}\\
     \medskip
-    \textsc{Textbook : 课堂讲义}\\
+    \textsc{Textbook : Lecture Notes}\\
     \bigskip
 	\textsc{Review for Discrete Mathematics}\\[0.4cm]
 	\rule{\linewidth}{0.2 mm} \\[0.5 cm]
@@ -24,13 +24,14 @@
 \end{titlepage}
 \restoregeometry
 
+\frontmatter 
+\chapter{前言}
+\input{pre.tex}
 \newpage
-\begin{abstract}
-	\input{abstract.tex}
-\end{abstract}
 \tableofcontents
 \newpage
 \thispagestyle{numberonly}
+\mainmatter 
 \chapter{计数 Enumerate}
 \input{enumerate}
 \chapter{组合数与组合恒等式 Combinatorial numbers

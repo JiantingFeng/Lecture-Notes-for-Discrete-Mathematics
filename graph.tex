@@ -136,6 +136,162 @@
 			V = \binom{[5]}{2}\text{ 和 }E = \{uv\in V^2: u\cap v =\emptyset\}
 		\end{equation*}
 		它有$10$个顶点$15$条边。
-		\item 超立方图（hypercube graph），记做
+		\item 超立方图（hypercube graph），记做$Q_k$是一个简单图，顶点集合是一个$k$维$01$向量，两个顶点相邻当且仅当只有一个位置上的数不同。
 	\end{enumerate}
 \end{definition}
+\begin{proposition}
+	令$G$是一个简单图，$G$是一个完全多部图当且仅当$G$是$K_1+K_2$-free的
+\end{proposition}
+\begin{center}
+	\begin{tikzpicture}[thick, scale = 0.8]
+	\draw[fill=black] (0,0) circle (3pt);
+	\draw[fill=black] (4,0) circle (3pt);
+	\draw[fill=black] (2,2) circle (3pt);
+	\node at (-0.5, 0) {v};
+	\node at (4.5, 0) {w};
+	\node at (2, 2.5) {u};
+	\draw[thick] (0,0) -- (4,0);
+\end{tikzpicture}
+\end{center}
+
+\begin{proof}
+	首先证明必要性，假设$G = K_{n_1,\cdots, n_k} = (V, E) $是一个完全多部图，顶点可以被划分为
+	\begin{equation*}
+		V = \sqcup_{i=1}^k V_i.
+	\end{equation*}
+	则对于任意$u, v, w\in V$满足
+	\begin{equation*}
+		uv\notin E\text{和}uw\notin E.
+	\end{equation*}
+	由于$uv\notin E$于是$u,v$在同一个部分， 称作$V_i$，由$uw\notin E$，我们知道$w\in V_i$。于是有$vw\notin E$，于是得出$G$是$K_1+K_2$-free的。\par
+	下面证明充分性，假设$G$是$K_1+K_2$-free的，需证$G$是完全多部图，假设$uv\notin E$，则$w$要么与$u,v$都相连要么都不相连，这定义了$G$上的一个等价关系。
+\end{proof}
+\begin{proposition}
+	Petersen graph$P$满足下列性质：
+	\begin{enumerate}
+		\item $P$是三正则（cubic）的；
+		\item 两个不相邻的顶点有一个共同的neighbor；
+		\item $P$的girth是$5$；
+		\item $P$有$10$个claw，有$10$个长为$6$的cycle。
+	\end{enumerate}
+\end{proposition}
+\begin{definition}
+	设$G$和$H$是两个图。一个$G$与$H$之间的同构映射（isomorphism）是一个双射$f:V(G)\rightarrow V(H)$满足
+	\begin{equation*}
+		uv\in E(G) \Leftrightarrow f(u)f(v)\in E(H)
+	\end{equation*}
+	即在$G$中相连的两个顶点在$H$中也相连。
+\end{definition}
+\begin{definition}
+	令$G$是一个简单图，$G$的顶点覆盖（vertex cover）是一组与所有边都相接的顶点。顶点覆盖数（vertex cover number）是$G$中最小的$vertex cover$中的顶点个数，记做$\beta(G)$。边覆盖（edge cover）是指一组与所有边都相接的顶点个数。如果一族顶点$S$，对于任意顶点$v\in V(G)$，要么$v$在$S$中要么$v$与$S$中的某个顶点$u$相邻，则被称为$dominating set$。dominating number是指$G$中的最小的dominating set的大小，记做$\gamma(G)$。
+\end{definition}
+\begin{figure*}[h]
+	\centering
+\includegraphics[width=0.5\textwidth]{img/vertex_cover.png}
+	\caption{Vertex cover\label{fig:vertex cover}}
+\end{figure*}
+\begin{figure*}[h]
+	\centering
+\includegraphics[width=0.3\textwidth]{img/dominating_set.png}
+	\caption{dominating set\label{fig:dominating set}}
+\end{figure*}
+\begin{definition}
+	如下是对图$G=(V, E)$的一些简单的操作（operation）
+	\begin{enumerate}
+		\item 删除$G$中的一个顶点（deleting a vertex）$v$是指从顶点集删去该点后删掉所有与该点相连的边
+		\begin{equation*}
+			(V\backslash \{v\}, E\backslash \{vu, u\in N(v)\})
+		\end{equation*}
+		\item 删除$G$中的一条边（deleting an edge）$e$
+		\begin{equation*}
+			(V, E\backslash \{e\})
+		\end{equation*}
+		\item 两张图的不交并（disjoint union） ，记做$G+H$，是指
+		\begin{equation*}
+			G+H = (V\sqcup V', E\sqcup E')
+		\end{equation*}
+		\item 两张图的并（union）记做$G\vee H$，是指
+		\begin{equation*}
+			G\vee H = (V\sqcup V', E\sqcup E'\cup (V\times V'))
+		\end{equation*}
+		是指将$G+H$的边并上所有$V\times V'$的边，即连接$V$与$V'$所有的顶点。
+		\item 复制顶点（duplicating a vertex）$v$是指
+		\begin{equation*}
+			(V\cup\{v'\}, E\cup\{v'x:vx\in E\}).
+		\end{equation*}
+		$v'$被称为$v$的一个twin，意思是将$v$复制出一个$v'$，原先与$v$相连的顶点在新图中都与$v'$相连。
+		\item $G$的线图（line graph），记做$L(G)$，是指图$E, F$，若边$e, e'\in E$在$G$中相邻，则在$L(G)$中该两点相连。
+		\item 图$G$的subdivision是指将$G$中的某些边中加入内点，再连接起来。
+		\item 一个图$H$被称作$G$的一个minor如果它能通过删除$G$边或顶点和在$G$中连线得到的。
+		\item 一个图$H$被称作$G$的一个topological minor如果它包含一个是$H$的subdivision的子图。
+	\end{enumerate}
+\end{definition}
+下面是这些操作的具体图例，
+\begin{figure*}[htb]
+	\centering
+\includegraphics[width=0.3\textwidth]{img/disjoint_union.png}
+	\caption{disjoint union of some complete graphs\label{fig:disjoint union}}
+\end{figure*}
+\begin{figure*}[htb]
+	\centering
+\includegraphics[width=0.3\textwidth]{img/LG_1.png}
+	\caption{Graph G\label{fig:LG_1}}
+\end{figure*}
+\begin{figure*}[htb]
+	\centering
+\includegraphics[width=0.3\textwidth]{img/LG_2.png}
+	\caption{Vertices in $L(G) $constructed from edges in $G$\label{fig:LG_2}}
+\end{figure*}
+\begin{figure*}[htb]
+	\centering
+\includegraphics[width=0.3\textwidth]{img/LG_3.png}
+	\caption{Added edges in $L(G)$\label{fig:LG_3}}
+\end{figure*}
+\begin{figure*}[htb]
+	\centering
+\includegraphics[width=0.3\textwidth]{img/LG_4.png}
+	\caption{The line graph $L(G)$\label{fig:LG_4}}
+\end{figure*}
+\begin{figure*}[htb]
+	\centering
+\includegraphics[width=0.3\textwidth]{img/sub_division.png}
+	\caption{subdivision of $uv$\label{fig:subdivision}}
+\end{figure*}
+下面的定理是极值图论（extremal graph theory）
+\begin{theorem}
+	一个$triangle$-free的$n$顶点简单图中边数最大为$\lfloor n^2/4 \rfloor$
+\end{theorem}
+\begin{proof}
+	设$G$是一个$n$个顶点的triangle-free简单图，令$A$是最大的独立集，其中$\alpha = |A|$。因为$G$是triangle-free的，于是每个顶点的neighborhood都是稳定的，即对于任意$v$
+	\begin{equation*}
+		\deg v \leq \alpha
+	\end{equation*}
+	。因为$V\backslash A$ 和$G$的所有顶点都相连，利用均值不等式既有
+	\begin{equation*}
+		|E| \leq \sum\limits_{V\in V\backslash A}\deg v\leq \alpha (n-\alpha) \leq (\frac{n}{2})^2
+	\end{equation*}
+\end{proof}
+\begin{theorem}
+	(Turan定理)设$p\geq 2$和$n\geq p+1$。令$S$是一个不包含$p$-cliques且有$n$个顶点的简单图。则所有满足这样的条件拥有最多边数的图同构与一个$p-1$部Turan图。
+\end{theorem}
+\begin{definition}
+	一个有向图（directed graph or digraph），是一张每条边都有一个或两个方向的图，每一条边被称为一个arc。如果图中有一条从$u$到$v$的有向边，则称$v$是$u$的successor并称$u$是$v$的predecessor。进入$v$的边数称为$v$的入度（indegree），反之为出度（outdegree）。一个有向图$D$的underlying graph是指去除$D$中边的方向。一个有向图是弱连通（weakly connected）的如果它的underlying graph是连通的， 有向图$D$任意两个顶点$u,v$都有一条directed path相连则称它是强连通（strongly connected）。强连通分支（strong component）是有向图中最大的强连通子图。
+\end{definition}
+\begin{definition}
+	竞赛图（tournament）是一个被指定方向的完全有向图。king是一个有向图中的顶点满足所有的顶点都可以至多两步到达king。
+\end{definition}
+\begin{proposition}
+	任意一个竞赛图都有一个king。
+\end{proposition}
+\section{树 Trees}
+\begin{theorem}
+	简单图$G$是$n$阶树（Tree）如果下面等价的断言成立
+	\begin{enumerate}
+		\item $G$连通（connected）无圈（acyclic）。
+		\item 任意两个顶点有且只有一条路径（path）。
+		\item $G$是一个极大连通图，即任意删除一条边$G$都不连通。
+		\item $G$是最小无圈图，即任意连一条边后$G$至少会变成有圈图。
+		\item $G$连通且有$n-1$条边。
+		\item $G$无圈且有$n-1$条边。
+	\end{enumerate}
+\end{theorem}
